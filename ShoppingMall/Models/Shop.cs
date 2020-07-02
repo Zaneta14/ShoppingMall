@@ -25,6 +25,8 @@ namespace ShoppingMall.Models
         public string Email { get; set; }
         [Required, StringLength(400, MinimumLength =20)]
         public string Description { get; set; }
+        public int SubCategoryId { get; set; }
+        public Subcategory Subcategory { get; set; }
         [Display(Name="Вработени")]
         public ICollection<Employment> Employees { get; set; }
     }

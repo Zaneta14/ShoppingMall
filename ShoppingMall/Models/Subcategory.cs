@@ -14,5 +14,6 @@ namespace ShoppingMall.Models
         public int CategoryId { get; set; }
         [Display(Name="Категорија")]    
         public Category Category { get; set; }
+        public ICollection<Shop> Shops { get; set; }
     }
 }
