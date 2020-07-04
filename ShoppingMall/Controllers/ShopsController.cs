@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShoppingMall.Data;
 using ShoppingMall.Models;
+using ShoppingMall.ViewModels;
 
 namespace ShoppingMall.Controllers
 {
@@ -20,10 +21,21 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Shops
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id, string searchString, int subcategoryId=0)
         {
-            var shoppingMallContext = _context.Shop.Include(s => s.Subcategory);
-            return View(await shoppingMallContext.ToListAsync());
+            var shops = _context.Shop.Where(s => s.Subcategory.CategoryId == id);
+            var subcategories = _context.Set<Subcategory>().Where(s => s.CategoryId == id);
+            if (!string.IsNullOrEmpty(searchString))
+                shops = shops.Where(s => s.Name.Contains(searchString));
+            if (subcategoryId != 0)
+                shops = shops.Where(s => s.Subcategory.Id == subcategoryId);
+            shops = shops.Include(s => s.Subcategory).ThenInclude(s => s.Category);
+            var viewModel = new ShopsFilterViewModel
+            {
+                Shops=await shops.ToListAsync(),
+                Subcategories = new SelectList(subcategories, "Id", "Name")
+            };
+            return View(viewModel);
         }
 
         // GET: Shops/Details/5
@@ -36,6 +48,7 @@ namespace ShoppingMall.Controllers
 
             var shop = await _context.Shop
                 .Include(s => s.Subcategory)
+                .ThenInclude(s=>s.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (shop == null)
             {
@@ -116,7 +129,7 @@ namespace ShoppingMall.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = 15 });
             }
             ViewData["SubCategoryId"] = new SelectList(_context.Subcategory, "Id", "Name", shop.SubCategoryId);
             return View(shop);

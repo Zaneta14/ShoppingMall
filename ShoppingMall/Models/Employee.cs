@@ -14,10 +14,19 @@ namespace ShoppingMall.Models
         [Required, Display(Name = "Презиме")]
         public string LastName { get; set; }
         public string PictureUrl { get; set; }
-        [Required, Url, Display(Name ="CV")]
+        [Url, Display(Name ="CV")]
         public string CVUrl { get; set; }
         [Required, Display(Name ="Email адреса")]
         public string Email { get; set; }
         public ICollection<Employment> Shops { get; set; }
+
+        [Display(Name = "Име и презиме")]
+        public string FullName
+        {
+            get
+            {
+                return String.Format("{0} {1}", FirstName, LastName);
+            }
+        }
     }
 }

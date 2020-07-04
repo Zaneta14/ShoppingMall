@@ -11,5 +11,6 @@ namespace ShoppingMall.Models
         public int Id { get; set; }
         [Required, StringLength(15, MinimumLength =3), Display(Name="Категорија")]
         public string Name { get; set; }
+        public ICollection<Subcategory> Subcategories { get; set; }
     }
 }

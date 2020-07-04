@@ -1,83 +1,28 @@
-﻿@model IEnumerable<ShoppingMall.Models.Shop>
+﻿@model ShoppingMall.ViewModels.ShopsFilterViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Продавници";
 }
 
-<h1>Index</h1>
+<h1>@Model.Shops.FirstOrDefault().Subcategory.Category.Name</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LogoUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkingHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TelephoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subcategory)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LogoUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorkingHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TelephoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subcategory.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<form asp-action="Index">
+    <p>
+        Категорија: <select asp-for="SubcategoryId" asp-items="Model.Subcategories">
+            <option value="">Сите</option>
+        </select>
+        Име: <input type="text" asp-for="SearchString" value=""/>
+        <input type="submit" value="Филтрирај" />
+    </p>
+</form>
+    <div class="card-columns">
+        @foreach (var item in Model.Shops)
+        {
+            <div class="card">
+                <div class="card-img" style="text-align:center"><img src="@item.LogoUrl"/></div>
+                <div class="card-body" style="text-align:center">
+                    <h5><b><a style="color:chocolate" asp-action="Details" asp-route-id="@item.Id">ПОВЕЌЕ</a></b></h5>
+                </div>
+            </div>
+        }
+    </div>

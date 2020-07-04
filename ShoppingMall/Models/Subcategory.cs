@@ -9,7 +9,7 @@ namespace ShoppingMall.Models
     public class Subcategory
     {
         public int Id { get; set; }
-        [Required, StringLength(15, MinimumLength = 3), Display(Name = "Подкатегорија")]
+        [Required, StringLength(25, MinimumLength = 3), Display(Name = "Подкатегорија")]
         public string Name { get; set; }
         public int CategoryId { get; set; }
         [Display(Name="Категорија")]    
