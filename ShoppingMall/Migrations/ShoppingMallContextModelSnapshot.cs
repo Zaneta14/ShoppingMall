@@ -30,7 +30,6 @@ namespace ShoppingMall.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CVUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -204,7 +203,7 @@ namespace ShoppingMall.Migrations
             modelBuilder.Entity("ShoppingMall.Models.Application", b =>
                 {
                     b.HasOne("ShoppingMall.Models.Shop", "Shop")
-                        .WithMany()
+                        .WithMany("Applications")
                         .HasForeignKey("ShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

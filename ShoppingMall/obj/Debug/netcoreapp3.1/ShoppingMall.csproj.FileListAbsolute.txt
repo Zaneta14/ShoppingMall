@@ -191,3 +191,5 @@ C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Appl
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Applications\Edit.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Applications\Index.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Applications\Apply.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Applications\Success.cshtml.g.cs

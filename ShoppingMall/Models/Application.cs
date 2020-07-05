@@ -13,10 +13,11 @@ namespace ShoppingMall.Models
         public string FirstName { get; set; }
         [Required, Display(Name = "Презиме")]
         public string LastName { get; set; }
-        [Required, Url, Display(Name = "CV")]
+        [Url, Display(Name = "CV")]
         public string CVUrl { get; set; }
         [DataType(DataType.Date), Display(Name = "Датум на аплицирање")]
         public DateTime ApplicationDate { get; set; }
+        [Display(Name ="Продавница")]
         public int ShopId { get; set; }
         public Shop Shop { get; set; }
     }
