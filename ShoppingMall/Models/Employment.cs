@@ -9,8 +9,10 @@ namespace ShoppingMall.Models
     public class Employment
     {
         public int Id { get; set; }
+        [Display(Name ="Продавница")]
         public int ShopId { get; set; }
         public Shop Shop { get; set; }
+        [Display(Name = "Вработен")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
         [DataType(DataType.Date), Display(Name ="Датум на започнување")]

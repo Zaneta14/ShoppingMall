@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ShoppingMall.Models.Employment>
+
+@{
+    ViewData["Title"] = "Вработувања";
+}
+
+<h1>Вработувања</h1>
+
+<p>
+    <a asp-action="Create" class="admin">Креирај</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShopId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinishDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shop.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinishDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="admin">Уреди</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="admin">Избриши</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

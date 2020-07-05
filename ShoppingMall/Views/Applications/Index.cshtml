@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<ShoppingMall.Models.Application>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Апликации";
 }
 
-<h1>Index</h1>
+<h1>Апликации</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -22,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.CVUrl)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApplicationDate)
+                @Html.DisplayNameFor(model => model.ShopId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Shop)
+                @Html.DisplayNameFor(model => model.ApplicationDate)
             </th>
             <th></th>
         </tr>
@@ -40,18 +37,18 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CVUrl)
+                <a href="@("/cvs/" + item.CVUrl)" target="_blank">
+                    @item.CVUrl
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shop.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ApplicationDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Shop.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="admin">Избриши</a>
             </td>
         </tr>
 }
