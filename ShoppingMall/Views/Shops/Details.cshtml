@@ -24,7 +24,8 @@
                 <div class="card-img" style="text-align:center;opacity:1"><img src="@Model.ImageUrl" width="675" height="420" /></div>
             </div>
             <p style="width:712px;text-align:justify">@Model.Description</p>
-            <a asp-action="Index" asp-route-id="@Model.Subcategory.Category.Id" style="color:chocolate"><b>Назад</b></a>
+            <a asp-action="Index" asp-route-id="@Model.Subcategory.Category.Id" style="color:chocolate"><b>Назад</b></a> |
+            <a asp-controller="Employments" asp-action="Index" asp-route-id="@Model.Id" style="color:chocolate"><b>Види вработени</b></a>
         </div>
     </div>
 </div>

@@ -1,59 +1,55 @@
 ﻿@model IEnumerable<ShoppingMall.Models.Employment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Вработени";
 }
 
-<h1>Index</h1>
+<h1>@Model.FirstOrDefault().Shop.Name</h1>
+<h4>Вработени</h4>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Shop)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FinishDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comment)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Shop.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FinishDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width:550px    ">
+            <div class="card-body" style="text-align:center;">
+                <div class="card-img" style="text-align:center"><img src="@item.Employee.PictureUrl" width="500" height="334" style="padding-bottom:10px" /></div>
+                <h5 style="color:darkolivegreen"><b>@item.Employee.FullName</b></h5>
+                @if (item.FinishDate == null)
+                {
+                    string[] date = item.StartDate.ToString().Split('/');
+                    <p>@date[2].Substring(0, 4) - </p>
+                }
+                else
+                {
+                    string[] date1 = item.StartDate.ToString().Split('/');
+                    string[] date2 = item.StartDate.ToString().Split('/');
+                    <p>@date1[2].Substring(0, 4) - @date2[2].Substring(0, 4)</p>
+                }
+                @if (item.Comment != null)
+                {
+                    <p><i>"@item.Comment"</i></p>
+                }
+                <p><b>@item.Employee.Email</b></p>
+                @if (item.Employee.Shops.Count() != 1)
+                {
+                    int x = item.Employee.Shops.Count();
+                    int y = 0;
+                    <p>Работи и во:
+                    @foreach (var shop in item.Employee.Shops)
+                    {
+                        y++;
+                        if (shop.Shop == item.Shop)
+                            continue;
+                        <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.ShopId" style="color:chocolate">
+                            @shop.Shop.Name</a>@if (y != x) {<label>, </label> }
+                        }
+                    </p>
+                }
+
+            </div>
+        </div>
+    }
+</div>
+
+<a asp-controller="Shops" asp-action="Details" asp-route-id="@Model.FirstOrDefault().ShopId" style="color:chocolate"><b>Назад</b></a>
+

@@ -20,10 +20,11 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Employments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            var shoppingMallContext = _context.Employment.Include(e => e.Employee).Include(e => e.Shop);
-            return View(await shoppingMallContext.ToListAsync());
+            var employments = _context.Employment.Where(s => s.ShopId == id);
+            employments = employments.Include(e => e.Shop).Include(e => e.Employee).ThenInclude(e=>e.Shops).ThenInclude(e=>e.Shop);
+            return View(await employments.ToListAsync());
         }
 
         // GET: Employments/Details/5
