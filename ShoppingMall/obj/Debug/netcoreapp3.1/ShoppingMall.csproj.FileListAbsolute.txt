@@ -162,12 +162,10 @@ C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\ShoppingMall.dll
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\ShoppingMall.pdb
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Create.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Delete.cshtml.g.cs
-C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Details.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Edit.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Index.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Subcategories\Create.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Subcategories\Delete.cshtml.g.cs
-C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Subcategories\Details.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Subcategories\Edit.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Subcategories\Index.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Shops\Create.cshtml.g.cs

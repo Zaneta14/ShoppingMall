@@ -1,12 +1,11 @@
 ﻿@model ShoppingMall.Models.Subcategory
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Додади подкатегорија";
 }
 
-<h1>Create</h1>
+<h2>Додади подкатегорија</h2>
 
-<h4>Subcategory</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,14 +21,14 @@
                 <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Додади" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="admin">Назад</a>
 </div>
 
 @section Scripts {

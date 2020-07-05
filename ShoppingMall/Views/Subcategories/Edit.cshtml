@@ -1,12 +1,10 @@
 ﻿@model ShoppingMall.Models.Subcategory
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Уреди подкатегорија";
 }
 
-<h1>Edit</h1>
-
-<h4>Subcategory</h4>
+<h2>Уреди подкатегорија</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,14 +22,14 @@
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Зачувај" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="admin">Назад</a>
 </div>
 
 @section Scripts {

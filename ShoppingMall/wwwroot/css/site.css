@@ -131,7 +131,9 @@ body {
         clear: both;
     }
 
-
+.admin {
+    color: #8A2BE2;
+}
 
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {

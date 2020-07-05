@@ -26,25 +26,6 @@ namespace ShoppingMall.Controllers
             return View(await shoppingMallContext.ToListAsync());
         }
 
-        // GET: Subcategories/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var subcategory = await _context.Subcategory
-                .Include(s => s.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (subcategory == null)
-            {
-                return NotFound();
-            }
-
-            return View(subcategory);
-        }
-
         // GET: Subcategories/Create
         public IActionResult Create()
         {
