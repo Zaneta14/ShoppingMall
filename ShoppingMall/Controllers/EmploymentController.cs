@@ -76,17 +76,19 @@ namespace ShoppingMall.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FinishDate")] Employment employment)
+        public async Task<IActionResult> Edit(int id, Employment entry)
         {
-            if (id != employment.Id)
+            if (id != entry.Id)
             {
                 return NotFound();
             }
-
+            var employment = _context.Employment.FirstOrDefault(s => s.Id == id);
             if (ModelState.IsValid)
             {
                 try
                 {
+                    
+                    employment.FinishDate = entry.FinishDate;
                     _context.Update(employment);
                     await _context.SaveChangesAsync();
                 }
