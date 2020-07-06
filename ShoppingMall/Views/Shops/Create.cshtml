@@ -1,12 +1,11 @@
 ﻿@model ShoppingMall.Models.Shop
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Креирај продавница";
 }
 
-<h1>Create</h1>
+<h2>Креирај продавница</h2>
 
-<h4>Shop</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -49,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control" rows="12"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -57,14 +56,14 @@
                 <select asp-for="SubCategoryId" class ="form-control" asp-items="ViewBag.SubCategoryId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Креирај" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-id="@ViewData["CategoryId"]" class="admin">Назад</a>
 </div>
 
 @section Scripts {

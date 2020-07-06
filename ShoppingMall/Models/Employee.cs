@@ -13,6 +13,7 @@ namespace ShoppingMall.Models
         public string FirstName { get; set; }
         [Required, Display(Name = "Презиме")]
         public string LastName { get; set; }
+        [Display(Name ="Слика")]
         public string PictureUrl { get; set; }
         [Url, Display(Name ="CV")]
         public string CVUrl { get; set; }

@@ -1,16 +1,15 @@
 ﻿@model ShoppingMall.Models.Employee
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Додади вработен";
 }
 
-<h1>Create</h1>
-
-<h4>Employee</h4>
+<h2>Додади вработен</h2>
+    
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -29,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CVUrl" class="control-label"></label>
-                <input asp-for="CVUrl" class="form-control" />
+                <input type="file" name="cvUrl" />
                 <span asp-validation-for="CVUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,14 +37,14 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Додади" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="admin">Назад</a>
 </div>
 
 @section Scripts {

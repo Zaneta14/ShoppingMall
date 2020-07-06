@@ -175,7 +175,6 @@ C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Shop
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Shops\Index.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Create.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Delete.cshtml.g.cs
-C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Details.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Edit.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employments\Create.cshtml.g.cs
@@ -192,3 +191,4 @@ C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Empl
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employment\Delete.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employment\Edit.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employment\Index.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Shops\EditEmployees.cshtml.g.cs

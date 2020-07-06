@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,34 +16,18 @@ namespace ShoppingMall.Controllers
     public class EmployeesController : Controller
     {
         private readonly ShoppingMallContext _context;
-
-        public EmployeesController(ShoppingMallContext context)
+        private IWebHostEnvironment WebHostEnvironment { get; }
+        public EmployeesController(ShoppingMallContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            WebHostEnvironment = webHostEnvironment;
         }
 
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employee.ToListAsync());
-        }
-
-        // GET: Employees/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employee = await _context.Employee
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return View(employee);
+            var employees = _context.Employee.Include(s => s.Shops).ThenInclude(s=>s.Shop);
+            return View(await employees.ToListAsync());
         }
 
         // GET: Employees/Create
@@ -54,8 +41,16 @@ namespace ShoppingMall.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PictureUrl,CVUrl,Email")] Employee employee)
+        public async Task<IActionResult> Create(Employee entry, IFormFile cvUrl)
         {
+            Employee employee = new Employee
+            {
+                FirstName = entry.FirstName,
+                LastName = entry.LastName,
+                Email = entry.Email,
+                PictureUrl = entry.PictureUrl,
+                CVUrl = UploadFile(cvUrl)
+            };
             if (ModelState.IsValid)
             {
                 _context.Add(employee);
@@ -86,7 +81,7 @@ namespace ShoppingMall.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PictureUrl,CVUrl,Email")] Employee employee)
+        public async Task<IActionResult> Edit(int id, Employee employee, IFormFile cvUrl)
         {
             if (id != employee.Id)
             {
@@ -98,6 +93,7 @@ namespace ShoppingMall.Controllers
                 try
                 {
                     _context.Update(employee);
+                    employee.CVUrl = UploadFile(cvUrl);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -145,6 +141,21 @@ namespace ShoppingMall.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        private string UploadFile(IFormFile file)
+        {
+            string uniqueFileName = null;
+            if (file != null)
+            {
+                string uploadsFolder = Path.Combine(WebHostEnvironment.WebRootPath, "employeeCVs");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(file.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
         private bool EmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.Id == id);

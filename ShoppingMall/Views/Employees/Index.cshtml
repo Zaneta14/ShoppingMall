@@ -1,59 +1,51 @@
 ﻿@model IEnumerable<ShoppingMall.Models.Employee>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Вработени";
 }
 
-<h1>Index</h1>
+<h1>Вработени</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="admin">Додади</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PictureUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CVUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PictureUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CVUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width:550px">
+            <div class="card-body" style="text-align:center;">
+                <div class="card-img" style="text-align:center"><img src="@item.PictureUrl" width="500" height="334" style="padding-bottom:10px" /></div>
+                <h5 style="color:darkolivegreen"><b>@item.FullName</b></h5>
+                <p><b>@item.Email</b></p>
+                @if (item.CVUrl != null)
+                {
+                    <p>
+                        CV:
+                        <a href="@("/employeeCVs/" + item.CVUrl)" target="_blank">
+                            @item.CVUrl
+                        </a>
+                    </p>
+                }
+                @if (item.Shops.Count() != 0)
+                {
+                    int x = item.Shops.Count();
+                    int y = 0;
+                    <p>
+                        Работи во:
+                        @foreach (var shop in item.Shops)
+                        {
+                            y++;
+                            <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.ShopId" style="color:chocolate">@shop.Shop.Name</a>
+                            @if (y != x)
+                            {<label>, </label>}
+                        }
+                    </p>
+                }
+                <p>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="admin"><b>Уреди</b></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="admin"><b>Избриши</b></a>
+                </p>
+            </div>
+        </div>
+    }
+</div>

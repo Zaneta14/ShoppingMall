@@ -103,7 +103,7 @@ namespace ShoppingMall.Controllers
             string uniqueFileName = null;
             if (file != null)
             {
-                string uploadsFolder = Path.Combine(WebHostEnvironment.WebRootPath, "cvs");
+                string uploadsFolder = Path.Combine(WebHostEnvironment.WebRootPath, "applicationCVs");
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(file.FileName);
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))

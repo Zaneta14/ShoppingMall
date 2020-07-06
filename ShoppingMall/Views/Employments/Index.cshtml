@@ -34,14 +34,14 @@
                 {
                     int x = item.Employee.Shops.Count();
                     int y = 0;
-                    <p>Работи и во:
-                    @foreach (var shop in item.Employee.Shops)
-                    {
-                        y++;
-                        if (shop.Shop == item.Shop)
-                            continue;
-                        <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.ShopId" style="color:chocolate">
-                            @shop.Shop.Name</a>@if (y != x) {<label>, </label> }
+                    <p>
+                        Работи и во:
+                        @foreach (var shop in item.Employee.Shops)
+                        {
+                            y++;
+                            if (shop.Shop == item.Shop)
+                                continue;
+                        <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.ShopId" style="color:chocolate">@shop.Shop.Name</a>@if (y != x) { <label>, </label>}
                         }
                     </p>
                 }
@@ -51,5 +51,7 @@
     }
 </div>
 
-<a asp-controller="Shops" asp-action="Details" asp-route-id="@Model.FirstOrDefault().ShopId" style="color:chocolate"><b>Назад</b></a>
+<a asp-controller="Shops" asp-action="Details" asp-route-id="@Model.FirstOrDefault().ShopId" style="color:chocolate"><b>Назад</b></a> |
+<a asp-controller="Shops" asp-action="EditEmployees" asp-route-id="@Model.FirstOrDefault().ShopId" style="color:chocolate"><b>Уреди</b></a>
+
 

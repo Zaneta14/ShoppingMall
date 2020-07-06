@@ -1,0 +1,41 @@
+﻿@model ShoppingMall.ViewModels.ShopEmployeesEditViewModel
+
+@{
+    ViewData["Title"] = "Уреди вработени";
+}
+
+<h2>Уреди вработени</h2>
+<h3>@Model.Shop.Name</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditEmployees">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Shop.Id" />
+            <div class="form-group">
+                <label class="control-label">Вработени</label>
+                <select asp-for="SelectedEmployees" class="form-control" asp-items="Model.EmployeeList"></select>
+                <span asp-validation-for="SelectedEmployees" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Зачувај" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Employments" asp-action="Index" asp-route-id="@Model.Shop.Id" class="admin">Назад</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+$(document).ready(function () {
+$("#SelectedEmployees").select2();
+});
+    </script>
+}

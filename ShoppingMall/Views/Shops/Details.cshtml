@@ -25,7 +25,9 @@
             </div>
             <p style="width:712px;text-align:justify">@Model.Description</p>
             <a asp-action="Index" asp-route-id="@Model.Subcategory.Category.Id" style="color:chocolate"><b>Назад</b></a> |
-            <a asp-controller="Employments" asp-action="Index" asp-route-id="@Model.Id" style="color:chocolate"><b>Види вработени</b></a>
+            <a asp-controller="Employments" asp-action="Index" asp-route-id="@Model.Id" style="color:chocolate"><b>Види вработени</b></a> |
+            <a asp-action="Edit" asp-route-id="@Model.Id" style="color:chocolate"><b>Уреди</b></a> |
+            <a asp-action="Delete" asp-route-id="@Model.Id" style="color:chocolate"><b>Избриши</b></a>
         </div>
     </div>
 </div>

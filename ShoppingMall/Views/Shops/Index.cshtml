@@ -6,6 +6,10 @@
 
 <h1>@Model.Shops.FirstOrDefault().Subcategory.Category.Name</h1>
 
+<p>
+    <a asp-controller="Shops" asp-action="Create" class="admin">Креирај</a>
+</p>
+
 <form asp-action="Index">
     <p>
         Категорија: <select asp-for="SubcategoryId" asp-items="Model.Subcategories">

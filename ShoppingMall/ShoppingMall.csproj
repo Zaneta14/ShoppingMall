@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\cvs\" />
+    <Folder Include="wwwroot\applicationCVs\" />
+    <Folder Include="wwwroot\employeeCVs\" />
   </ItemGroup>
 
 
