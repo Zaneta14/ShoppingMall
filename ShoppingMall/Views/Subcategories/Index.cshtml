@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShoppingMall.Models.Subcategory>
+﻿@model ShoppingMall.ViewModels.SubcategoriesFilterViewModel
 
 @{
     ViewData["Title"] = "Подкатегории";
@@ -9,20 +9,29 @@
 <p>
     <a asp-action="Create" class="admin">Додади</a>
 </p>
+
+<form asp-action="Index">
+    <p>
+        Категорија: <select asp-for="CategoryId" asp-items="@Model.Categories">
+        <option value="">Сите</option></select>
+        Име: <input type="text" asp-for="Name" />
+        <input type="submit" value="Филтрирај"/>
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Subcategories[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                @Html.DisplayNameFor(model => model.Subcategories[0].CategoryId)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Subcategories) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

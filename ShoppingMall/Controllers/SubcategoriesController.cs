@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShoppingMall.Data;
 using ShoppingMall.Models;
+using ShoppingMall.ViewModels;
 
 namespace ShoppingMall.Controllers
 {
@@ -20,10 +21,20 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Subcategories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoryId, string name)
         {
-            var shoppingMallContext = _context.Subcategory.Include(s => s.Category);
-            return View(await shoppingMallContext.ToListAsync());
+            IQueryable<Subcategory> subcategories = _context.Subcategory;
+            if (categoryId != null)
+                subcategories = subcategories.Where(s => s.CategoryId == categoryId);
+            if (!string.IsNullOrEmpty(name))
+                subcategories = subcategories.Where(s => s.Name.Contains(name));
+            subcategories = subcategories.Include(s => s.Category);
+            var viewModel = new SubcategoriesFilterViewModel
+            {
+                Subcategories = await subcategories.ToListAsync(),
+                Categories=new SelectList(_context.Category, "Id", "Name")
+            };
+            return View(viewModel);
         }
 
         // GET: Subcategories/Create
