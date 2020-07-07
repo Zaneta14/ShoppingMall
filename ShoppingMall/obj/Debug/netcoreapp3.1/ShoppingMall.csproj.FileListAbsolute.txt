@@ -192,3 +192,4 @@ C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Empl
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employment\Edit.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employment\Index.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Shops\EditEmployees.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employments\MyEmployments.cshtml.g.cs

@@ -26,10 +26,33 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Applications
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string selectedSort, int shopId = 0)
         {
-            var shoppingMallContext = _context.Application.Include(a => a.Shop);
-            return View(await shoppingMallContext.ToListAsync());
+            IQueryable<Application> applications = _context.Application;
+            if (shopId != 0)
+                applications = applications.Where(a => a.ShopId == shopId);
+            if (!string.IsNullOrEmpty(selectedSort))
+            {
+                if (selectedSort == "desc")
+                    applications = applications.OrderByDescending(a => a.ApplicationDate);
+                else if (selectedSort == "asc")
+                    applications = applications.OrderBy(a => a.ApplicationDate);
+            }
+            applications = applications.Include(a => a.Shop);
+            var array = new[]
+            {
+                new SelectListItem {Value="asc", Text="Најстари кон најнови"},
+                new SelectListItem {Value="desc", Text="Најнови кон најстари" }
+            };
+            List<SelectListItem> sorts = new List<SelectListItem>();
+            sorts = array.ToList();
+            var viewModel = new ApplicationsFilterViewModel
+            {
+                Applications = await applications.ToListAsync(),
+                Shops = new SelectList(_context.Shop, "Id", "Name"),
+                Sorts=sorts
+            };
+            return View(viewModel);
         }
 
         // GET: Applications/Delete/5

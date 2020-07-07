@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShoppingMall.Models.Application>
+﻿@model ShoppingMall.ViewModels.ApplicationsFilterViewModel
 
 @{
     ViewData["Title"] = "Апликации";
@@ -6,29 +6,43 @@
 
 <h1>Апликации</h1>
 
+<form asp-action="Index">
+    <p>
+        <select asp-for="SelectedSort" asp-items="Model.Sorts">
+        </select>
+        <input type="submit" value="Сортирај" />
+    </p>
+    <p>
+        Продавница: <select asp-for="ShopId" asp-items="Model.Shops">
+            <option value="">Сите</option>
+        </select>
+        <input type="submit" value="Филтрирај" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.Applications[0].FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.Applications[0].LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CVUrl)
+                @Html.DisplayNameFor(model => model.Applications[0].CVUrl)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ShopId)
+                @Html.DisplayNameFor(model => model.Applications[0].ShopId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApplicationDate)
+                @Html.DisplayNameFor(model => model.Applications[0].ApplicationDate)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Applications) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)

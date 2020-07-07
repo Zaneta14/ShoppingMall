@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShoppingMall.Models.Employment>
+﻿@model ShoppingMall.ViewModels.EmploymentsFilterViewModel
 
 @{
     ViewData["Title"] = "Вработувања";
@@ -9,26 +9,38 @@
 <p>
     <a asp-action="Create" class="admin">Креирај</a>
 </p>
+
+<form asp-action="Index">
+    <p>
+        Вработен: <select asp-for="EmployeeId" asp-items="Model.Employees">
+            <option value="">Сите</option>
+        </select>
+        Продавница: <select asp-for="ShopId" asp-items="Model.Shops">
+            <option value="">Сите</option>
+        </select>
+        <input type="submit" value="Филтрирај"/>
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.EmployeeId)
+                @Html.DisplayNameFor(model => model.Employments[0].EmployeeId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ShopId)
+                @Html.DisplayNameFor(model => model.Employments[0].ShopId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                @Html.DisplayNameFor(model => model.Employments[0].StartDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FinishDate)
+                @Html.DisplayNameFor(model => model.Employments[0].FinishDate)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Employments) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Employee.FullName)

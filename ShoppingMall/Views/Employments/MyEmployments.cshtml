@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ShoppingMall.Models.Employment>
+
+@{
+    ViewData["Title"] = "Мои продавници";
+}
+
+<h1>Мои продавници</h1>
+<h3>@Model.FirstOrDefault().Employee.FullName</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShopId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinishDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a asp-controller="Shops" asp-action="Details" asp-route-id="@item.Shop.Id">
+                    @Html.DisplayFor(modelItem => item.Shop.Name)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinishDate)
+            </td>
+            <td>
+                @if (item.Comment != null)
+                {
+                    <i>"@Html.DisplayFor(modelItem => item.Comment)"</i>
+                }
+            </td>
+                @if (item.FinishDate == null)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="employee">Уреди</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

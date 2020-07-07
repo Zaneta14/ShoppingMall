@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShoppingMall.Data;
 using ShoppingMall.Models;
+using ShoppingMall.ViewModels;
 
 namespace ShoppingMall.Controllers
 {
@@ -20,10 +21,39 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Employments
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id, string selectListId)
         {
             var employments = _context.Employment.Where(s => s.ShopId == id);
-            employments = employments.Include(e => e.Shop).Include(e => e.Employee).ThenInclude(e=>e.Shops).ThenInclude(e=>e.Shop);
+            Shop shop = _context.Shop.Find(id);
+            ViewData["ShopName"] = shop.Name;
+            ViewData["ShopId"] = shop.Id;
+            if(!string.IsNullOrEmpty(selectListId))
+            {
+                if (selectListId == "old")
+                    employments = employments.Where(s => s.FinishDate != null);
+                else if (selectListId=="new")
+                    employments = employments.Where(s => s.FinishDate == null);
+            }
+            employments = employments.Include(e => e.Shop).Include(e => e.Employee).ThenInclude(e => e.Shops).ThenInclude(e => e.Shop);
+            var array = new[]
+            {
+                new SelectListItem {Value="new", Text="Тековни"},
+                new SelectListItem {Value="old", Text="Изминати" }
+            };
+            List<SelectListItem> selectList = new List<SelectListItem>();
+            selectList = array.ToList();
+            var viewModel = new EmployeesInShopFilterViewModel
+            {
+                Employments = await employments.ToListAsync(),
+                SelectList = selectList
+            };
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> MyEmployments(int id)
+        {
+            var employments = _context.Employment.Where(s => s.EmployeeId == id);
+            employments = employments.Include(e => e.Shop).Include(e => e.Employee);
             return View(await employments.ToListAsync());
         }
 
@@ -86,8 +116,7 @@ namespace ShoppingMall.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "CVUrl", employment.EmployeeId);
-            ViewData["ShopId"] = new SelectList(_context.Shop, "Id", "Description", employment.ShopId);
+            ViewData["ShopId"] = new SelectList(_context.Shop, "Id", "Name", employment.ShopId);
             return View(employment);
         }
 
@@ -96,17 +125,18 @@ namespace ShoppingMall.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ShopId,EmployeeId,StartDate,FinishDate,Comment")] Employment employment)
+        public async Task<IActionResult> Edit(int id, Employment entry)
         {
-            if (id != employment.Id)
+            if (id != entry.Id)
             {
                 return NotFound();
             }
-
+            var employment = _context.Employment.FirstOrDefault(s => s.Id == id);
             if (ModelState.IsValid)
             {
                 try
                 {
+                    employment.Comment = entry.Comment;
                     _context.Update(employment);
                     await _context.SaveChangesAsync();
                 }
@@ -121,10 +151,9 @@ namespace ShoppingMall.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MyEmployments), new { id = employment.EmployeeId });
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "CVUrl", employment.EmployeeId);
-            ViewData["ShopId"] = new SelectList(_context.Shop, "Id", "Description", employment.ShopId);
+            ViewData["ShopId"] = new SelectList(_context.Shop, "Id", "Name", employment.ShopId);
             return View(employment);
         }
 

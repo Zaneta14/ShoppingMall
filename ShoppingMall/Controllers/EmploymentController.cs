@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShoppingMall.Data;
 using ShoppingMall.Models;
+using ShoppingMall.ViewModels;
 
 namespace ShoppingMall.Controllers
 {
@@ -21,10 +22,26 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Employment
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int shopId=0, int employeeId=0)
         {
-            var shoppingMallContext = _context.Employment.Include(e => e.Employee).Include(e => e.Shop);
-            return View(await shoppingMallContext.ToListAsync());
+            IQueryable<Employment> employments = _context.Employment;
+            IQueryable<Shop> shops = _context.Shop;
+            IQueryable<Employee> employees = _context.Employee;
+            var viewModel = new EmploymentsFilterViewModel();
+            if (shopId != 0)
+            {
+                employments = employments.Where(e => e.ShopId == shopId);
+                employees = employees.Where(e => e.Shops.Select(s => s.ShopId).Contains(shopId));
+            }
+            viewModel.Employees=new SelectList(employees, "Id", "FullName");
+            if (employeeId != 0)
+            {
+                employments = employments.Where(e => e.EmployeeId == employeeId);
+                shops = shops.Where(e => e.Employees.Select(s => s.EmployeeId).Contains(employeeId));
+            }
+            viewModel.Shops = new SelectList(shops, "Id", "Name");
+            viewModel.Employments = await employments.ToListAsync();
+            return View(viewModel);
         }
 
         // GET: Employment/Create
@@ -87,7 +104,6 @@ namespace ShoppingMall.Controllers
             {
                 try
                 {
-                    
                     employment.FinishDate = entry.FinishDate;
                     _context.Update(employment);
                     await _context.SaveChangesAsync();

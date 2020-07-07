@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShoppingMall.Data;
 using ShoppingMall.Models;
+using ShoppingMall.ViewModels;
 
 namespace ShoppingMall.Controllers
 {
@@ -24,10 +25,30 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string firstName, string lastName, int shopId=0)
         {
-            var employees = _context.Employee.Include(s => s.Shops).ThenInclude(s=>s.Shop);
-            return View(await employees.ToListAsync());
+            IQueryable<Employee> employees = _context.Employee;
+            if (!string.IsNullOrEmpty(firstName))
+            {
+                employees = employees.Where(e => e.FirstName == firstName);
+                ViewData["FirstName"] = firstName;
+            }
+            if (!string.IsNullOrEmpty(lastName))
+            {
+                employees = employees.Where(e => e.LastName == lastName);
+                ViewData["LastName"] = lastName;
+            }
+            if (shopId!=0)
+            {
+                employees = employees.Where(s => s.Shops.Select(s=>s.ShopId).Contains(shopId));
+            }
+            employees = employees.Include(s => s.Shops).ThenInclude(s => s.Shop);
+            var viewModel = new EmployeesFilterViewModel
+            {
+                Employees=await employees.ToListAsync(),
+                Shops=new SelectList(_context.Shop, "Id", "Name")
+            };
+            return View(viewModel);
         }
 
         // GET: Employees/Create

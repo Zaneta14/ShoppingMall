@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShoppingMall.Models.Employee>
+﻿@model ShoppingMall.ViewModels.EmployeesFilterViewModel
 
 @{
     ViewData["Title"] = "Вработени";
@@ -9,8 +9,20 @@
 <p>
     <a asp-action="Create" class="admin">Додади</a>
 </p>
+
+<form asp-action="Index">
+    <p>
+        Продавница: <select asp-for="ShopId" asp-items="Model.Shops">
+        <option value="">Сите</option>
+        </select>
+        Име: <input type="text" asp-for="FirstName" value="@ViewData["FirstName"]" />
+        Презиме: <input type="text" asp-for="LastName" value="@ViewData["LastName"]" />
+        <input type="submit" value="Филтрирај" />
+    </p>
+</form>
+
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.Employees)
     {
         <div class="card" style="width:550px">
             <div class="card-body" style="text-align:center;">
@@ -28,16 +40,23 @@
                 }
                 @if (item.Shops.Count() != 0)
                 {
-                    int x = item.Shops.Count();
-                    int y = 0;
                     <p>
-                        Работи во:
+                        Работи во: |
                         @foreach (var shop in item.Shops)
                         {
-                            y++;
-                            <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.ShopId" style="color:chocolate">@shop.Shop.Name</a>
-                            @if (y != x)
-                            {<label>, </label>}
+                            if (shop.FinishDate != null)
+                                continue;
+                            <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.ShopId" style="color:chocolate">@shop.Shop.Name</a> <label> | </label>
+                        }
+                    </p>
+                    <p>
+                        Работел/а во: |
+                        @foreach (var shop in item.Shops)
+                        {
+                            if (shop.FinishDate != null)
+                            {
+                                <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.ShopId" style="color:chocolate">@shop.Shop.Name</a> <label> | </label>
+                            }
                         }
                     </p>
                 }

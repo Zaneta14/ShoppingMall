@@ -135,6 +135,10 @@ body {
     color: #8A2BE2;
 }
 
+.employee {
+    color: #008B8B;
+}
+
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
     .column {
