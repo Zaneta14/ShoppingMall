@@ -1,13 +1,15 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ShoppingMall.Models;
 
 namespace ShoppingMall.Data
 {
-    public class ShoppingMallContext : DbContext
+    public class ShoppingMallContext : IdentityDbContext<AppUser, IdentityRole, string>
     {
         public ShoppingMallContext (DbContextOptions<ShoppingMallContext> options)
             : base(options)
@@ -28,6 +30,7 @@ namespace ShoppingMall.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);  
             builder.Entity<Employment>()
             .HasOne<Shop>(p => p.Shop)
             .WithMany(p => p.Employees)

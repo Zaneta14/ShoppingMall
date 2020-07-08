@@ -31,6 +31,5 @@ namespace ShoppingMall.Models
         public Subcategory Subcategory { get; set; }
         [Display(Name="Вработени")]
         public ICollection<Employment> Employees { get; set; }
-        public ICollection<Application> Applications { get; set; }
     }
 }

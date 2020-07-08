@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Applications
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string selectedSort, int shopId = 0)
         {
             IQueryable<Application> applications = _context.Application;
@@ -56,6 +58,7 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Applications/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -77,6 +80,7 @@ namespace ShoppingMall.Controllers
         // POST: Applications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var application = await _context.Application.FindAsync(id);

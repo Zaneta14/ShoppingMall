@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +61,7 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Shops/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = TempData["CategoryId"];
@@ -75,6 +77,7 @@ namespace ShoppingMall.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,Name,LogoUrl,ImageUrl,Location,WorkingHours,TelephoneNumber,Email,Description,SubCategoryId")] Shop shop)
         {
             if (ModelState.IsValid)
@@ -88,6 +91,7 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Shops/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -109,6 +113,7 @@ namespace ShoppingMall.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LogoUrl,ImageUrl,Location,WorkingHours,TelephoneNumber,Email,Description,SubCategoryId")] Shop shop)
         {
             if (id != shop.Id)
@@ -141,6 +146,7 @@ namespace ShoppingMall.Controllers
         }
 
         // GET: Shops/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -163,6 +169,7 @@ namespace ShoppingMall.Controllers
         // POST: Shops/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var shop = await _context.Shop.FindAsync(id);
@@ -172,6 +179,7 @@ namespace ShoppingMall.Controllers
             return RedirectToAction(nameof(Index), new { id = cId });
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditEmployees(int? id)
         {
             if (id == null)
@@ -196,6 +204,7 @@ namespace ShoppingMall.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditEmployees(int id, ShopEmployeesEditViewModel viewmodel)
         {
             if (id != viewmodel.Shop.Id)

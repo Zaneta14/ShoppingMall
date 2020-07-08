@@ -6,27 +6,30 @@
 
 <h1>@Model.Shops.FirstOrDefault().Subcategory.Category.Name</h1>
 
-<p>
-    <a asp-controller="Shops" asp-action="Create" class="admin">Креирај</a>
-</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-controller="Shops" asp-action="Create" class="admin">Креирај</a>
+    </p>
+}
 
 <form asp-action="Index">
     <p>
         Категорија: <select asp-for="SubcategoryId" asp-items="Model.Subcategories">
             <option value="">Сите</option>
         </select>
-        Име: <input type="text" asp-for="SearchString" value=""/>
+        Име: <input type="text" asp-for="SearchString" value="" />
         <input type="submit" value="Филтрирај" />
     </p>
 </form>
-    <div class="card-columns">
-        @foreach (var item in Model.Shops)
-        {
-            <div class="card">
-                <div class="card-img" style="text-align:center"><img src="@item.LogoUrl"/></div>
-                <div class="card-body" style="text-align:center">
-                    <h5><b><a style="color:chocolate" asp-action="Details" asp-route-id="@item.Id">ПОВЕЌЕ</a></b></h5>
-                </div>
+<div class="card-columns">
+    @foreach (var item in Model.Shops)
+    {
+        <div class="card">
+            <div class="card-img" style="text-align:center"><img src="@item.LogoUrl" /></div>
+            <div class="card-body" style="text-align:center">
+                <h5><b><a style="color:chocolate" asp-action="Details" asp-route-id="@item.Id">ПОВЕЌЕ</a></b></h5>
             </div>
-        }
-    </div>
+        </div>
+    }
+</div>

@@ -12,7 +12,7 @@
         <select asp-for="SelectListId" asp-items="Model.SelectList">
             <option value="">Сите</option>
         </select>
-        <input type="submit" value="Филтрирај"/>
+        <input type="submit" value="Филтрирај" />
     </p>
 </form>
 
@@ -57,7 +57,11 @@
     }
 </div>
 
-<a asp-controller="Shops" asp-action="Details" asp-route-id="@ViewData["ShopId"]" style="color:chocolate"><b>Назад</b></a> |
-<a asp-controller="Shops" asp-action="EditEmployees" asp-route-id="@ViewData["ShopId"]" style="color:chocolate"><b>Уреди</b></a>
+<a asp-controller="Shops" asp-action="Details" asp-route-id="@ViewData["ShopId"]" style="color:chocolate"><b>Назад</b></a>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <label> | </label>
+    <a asp-controller="Shops" asp-action="EditEmployees" asp-route-id="@ViewData["ShopId"]" style="color:chocolate"><b>Уреди</b></a>
+}
 
 

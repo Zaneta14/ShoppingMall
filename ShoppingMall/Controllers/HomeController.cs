@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShoppingMall.Models;
@@ -11,15 +12,27 @@ namespace ShoppingMall.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<AppUser> userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UserManager<AppUser> userMgr)
         {
-            _logger = logger;
+            userManager = userMgr;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser appUser = await userManager.GetUserAsync(User);
+                if (await userManager.IsInRoleAsync(appUser, "Admin"))
+                {
+                    return View();
+                }
+                if (await userManager.IsInRoleAsync(appUser, "Employee"))
+                {
+                    return RedirectToAction("About", "Employments", null);
+                }
+            }
             return View();
         }
 

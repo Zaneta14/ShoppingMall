@@ -147,3 +147,7 @@ body {
         margin-bottom: 20px;
     }
 }
+
+.navbar-right {
+    float: right;
+}

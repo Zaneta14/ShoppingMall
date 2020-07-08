@@ -155,7 +155,6 @@ C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\ru\Microsoft.Cod
 C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\ShoppingMall.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\ShoppingMall.Views.pdb
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\ShoppingMall.dll
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\ShoppingMall.pdb
@@ -176,7 +175,6 @@ C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Empl
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Delete.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Edit.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
-C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employments\Edit.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employments\Index.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Applications\Delete.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Applications\Index.cshtml.g.cs
@@ -189,3 +187,16 @@ C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Empl
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employment\Index.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Shops\EditEmployees.cshtml.g.cs
 C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employments\MyEmployments.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Account\UserInfo.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Zane\ShoppingMall\ShoppingMall\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\ShoppingMall.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EmployeeProfile.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employments\About.cshtml.g.cs
+C:\Users\Zane\ShoppingMall\ShoppingMall\obj\Debug\netcoreapp3.1\Razor\Views\Employments\Edit.cshtml.g.cs

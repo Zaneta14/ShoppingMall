@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingMall.Data;
 using System;
@@ -10,12 +11,65 @@ namespace ShoppingMall.Models
 {
     public class SeedData
     {
+        public static async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
+
+            IdentityResult roleResult;
+            //Adding Admin Role
+            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+           if (!roleCheck)
+           {
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+           }
+            roleCheck = await RoleManager.RoleExistsAsync("Employee");
+            if (!roleCheck)
+            {
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Employee"));
+            }
+
+            AppUser user = await UserManager.FindByEmailAsync("admin@goldenmall.com");
+            if (user == null)
+            {
+                var User = new AppUser();
+                User.Email = "admin@goldenmall.com";
+                User.UserName = "admin";
+                User.Role = "Admin";
+                string userPWD = "Admin123";
+                IdentityResult chkUser = await UserManager.CreateAsync(User, userPWD);
+                //Add default User to Role Admin      
+                if (chkUser.Succeeded)
+                {
+                    var result1 = await UserManager.AddToRoleAsync(User, "Admin");
+                }
+            }
+
+            user = await UserManager.FindByEmailAsync("zanetatrenceva1@gmail.com");
+            if (user == null)
+            {
+                var User = new AppUser();
+                User.Email = "zanetatrenceva1@gmail.com";
+                User.UserName = "zanetatrenceva1@gmail.com";
+                User.Role = "Employee";
+                User.EmployeeId = 10;
+                string userPWD = "Zaneta123";
+                IdentityResult chkUser = await UserManager.CreateAsync(User, userPWD);
+                //Add default User to Role Admin      
+                if (chkUser.Succeeded)
+                {
+                    var result2 = await UserManager.AddToRoleAsync(User, "Employee");
+                }
+            }
+        }
+
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new ShoppingMallContext(
             serviceProvider.GetRequiredService<
             DbContextOptions<ShoppingMallContext>>()))
             {
+                CreateUserRoles(serviceProvider).Wait();
                 // Look for any movies.
                 if (context.Category.Any() || context.Subcategory.Any() || context.Employee.Any() || context.Shop.Any() || context.Application.Any())
                 {
