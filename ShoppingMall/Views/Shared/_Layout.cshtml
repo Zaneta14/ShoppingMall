@@ -10,89 +10,48 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Почетна</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Категории</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Subcategories" asp-action="Index">Подкатегории</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=13>Шопинг</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=14>Храна</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=15>Услуги</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Index" asp-route-id=13>Вработени</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Employment" asp-action="Index" asp-route-id=13>Вработувања</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Applications" asp-action="Index" asp-route-id=13>Апликации</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Корисници</a>
-                                </li>
-                            }
-                            @if (User.IsInRole("Employee"))
-                            {
-                                <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Employments" asp-action="About">За мене</a></li>
-
-                                <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Employments" asp-action="MyEmployments">Мои продавници</a></li>
-                            }
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">За нас</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=13>Шопинг</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=14>Храна</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=15>Услуги</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Applications" asp-action="Apply" asp-route-id=15>Аплицирај</a>
-                            </li>
-                        }
-                    </ul>
-                    <div >
-                        <ul class="nav navbar-nav navbar-right">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="UserInfo">@(User.Identity.Name)</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">Одјава</a></li>
-                            }
-                            else
-                            {
-                                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Најава</a></li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <div class="topnav">
+            <a class="active" asp-area="" asp-controller="Home" asp-action="Index">Почетна</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-area="" asp-controller="Categories" asp-action="Index">Категории</a>
+                    <a asp-area="" asp-controller="Subcategories" asp-action="Index">Подкатегории</a>
+                    <a asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=13>Шопинг</a>
+                    <a asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=14>Храна</a>
+                    <a asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=15>Услуги</a>
+                    <a asp-area="" asp-controller="Employees" asp-action="Index">Вработени</a>
+                    <a asp-area="" asp-controller="Employment" asp-action="Index">Вработувања</a>
+                    <a asp-area="" asp-controller="Applications" asp-action="Index">Апликации</a>
+                    <a asp-area="" asp-controller="Admin" asp-action="Index">Корисници</a>
+                }
+                else if (User.IsInRole("Employee"))
+                {
+                    <a asp-area="" asp-controller="Employments" asp-action="About">За мене</a>
+                    <a asp-area="" asp-controller="Employments" asp-action="MyEmployments">Мои продавници</a>
+                }
+            }
+            else
+            {
+                <a asp-area="" asp-controller="Home" asp-action="About">За нас</a>
+                <a asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=13>Шопинг</a>
+                <a asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=14>Храна</a>
+                <a asp-area="" asp-controller="Shops" asp-action="Index" asp-route-id=15>Услуги</a>
+                <a asp-area="" asp-controller="Applications" asp-action="Apply">Аплицирај</a>
+            }
+        <div class="topnav-right">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-area="" asp-controller="Account" asp-action="UserInfo">@(User.Identity.Name)</a>
+                <a asp-area="" asp-controller="Account" asp-action="Logout">Одјава</a>
+            }
+            else
+            {
+                <a asp-area="" asp-controller="Account" asp-action="Login">Најава</a>
+            }
+        </div>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
